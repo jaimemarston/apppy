@@ -1,20 +1,10 @@
-import sqlite3
-print ("Lista de contactos")
-print ("------------------")
-print ("")
-
-con = sqlite3.connect("agenda.db")
-cursor = con.cursor()
-
-cursor.execute("SELECT * FROM datos")
-resultado = cursor.fetchall()
-
-for i in resultado:
-    #print ("%s %s %s %s %s %s %s" % (i[0],i[1],i[2],i[3],i[4],i[5],i[6]))
-    print (i[0].ljust(80),i[1].ljust(30),i[2].ljust(40),i[3],i[5],sep="|")
-  
-
-cursor.close()
-
-print ("")
-input("Presione una tecla para continuar...")
+import psycopg2
+try:
+    connection = psycopg2.connect(user = "sysadmin",
+                                  password = "pynative@#29",
+                                  host = "127.0.0.1",
+                                  port = "5432",
+                                  database = "postgres_db")
+    cursor = connection.cursor()
+    # Print PostgreSQL Connection properties
+    print ( connection.get_dsn_parameters(),"\n")
